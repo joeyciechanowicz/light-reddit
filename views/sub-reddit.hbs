@@ -1,8 +1,19 @@
 
 <main class="c-main" id="main">
-    <h1>/r/{{subreddit}}</h1>
+    <h1>/r/{{subredditName}}</h1>
+
+    {{#if nsfw}}
+        <a href="/r/{{subredditName}}">Disable NSFW mode</a>
+    {{/if}}
 
     {{#each posts}}
-        {{>post-overview}}
+        {{>post-preview}}
     {{/each}}
+
+
+    {{#if showBack}}
+<!--        <a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?count={{backwardCount}}">Previous</a>-->
+    {{/if}}
+
+    <a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?after={{after}}&count={{count}}">Next</a>
 </main>

@@ -37,7 +37,7 @@
     --border-thick: var(--s-2);
 
     line-height: var(--ratio);
-    font-size: calc(1em);
+    font-size: calc(1em - 0.1em);
     font-family: var(--font-plain);
     background-color: var(--color-light);
     color: var(--color-dark)
@@ -87,16 +87,18 @@ footer, header, main, nav {
     outline:none
 }
 
+/********
+    Component Main
+ */
 .c-main {
-    padding: var(--s1);
-    min-height: 100vh;
+    padding: var(--s-1);
+    /*min-height: 100vh;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.c-main {
     --space: var(--s0);
+    max-width: 50rem;
+    margin: 0 auto;
 }
 
 .c-main > * {
@@ -107,7 +109,62 @@ footer, header, main, nav {
     margin-top: var(--space);
 }
 
-.c-overview {
+/**********
+    Component: Post preview
+    Summary of a post that's shown when viewing a whole subreddit
+ */
+.c-post-preview {
     border: var(--border-thin) solid black;
-    padding: var(--border-thin);
+    padding: var(--border-thick);
+}
+
+.c-post-preview__user {
+    font-size: calc(0.9em);
+}
+
+.c-post-preview__title{
+   width: 100%;
+}
+
+.c-post-preview__title {
+    display: inline-block;
+}
+
+video.c-post-preview__media {
+    width: 100%;
+    max-height: calc(30em);
+}
+
+img.c-post-preview__media {
+    max-width: 100%;
+    max-height: calc(30em);
+    margin: 0 auto;
+}
+
+.c-post-preview__selftext {
+    padding: var(--s-1) var(--s-2) var(--s-1) var(--s-2);
+}
+
+.c-post-preview__media-container {
+    width: 100%;
+    text-align: center;
+}
+
+/****
+    Component: Flair
+    Shows flags against users and psts
+ */
+.c-flair {
+    display: inline-block;
+    padding: initial var(--s-4) initial var(--s-4);
+}
+
+.c-flair--dark {
+    background-color: #343536;
+    color: #ffffff;
+}
+
+.c-flair--light {
+    background-color: #996666;
+    color: #000000;
 }

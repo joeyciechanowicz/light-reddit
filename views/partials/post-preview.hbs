@@ -1,0 +1,71 @@
+<article role="article" class="c-post-preview">
+    {{#if score}}
+        <span class="c-score">
+            {{score}} points
+        </span>
+    {{/if}}
+
+    <header class="c-post-preview__header">
+        {{#if showPostSubreddit}}
+            <span class="c-post-preview__subreddit">
+                {{subreddit_name_prefixed}}
+            </span>
+        {{/if}}
+
+        <span class="c-post-preview__user">
+            By u/{{author}}
+
+            {{#if author_flair_text}}
+                <span class="c-flair c-flair--{{author_flair_text_color}}">{{author_flair_text}}</span>
+            {{/if}}
+
+            {{#if stickied}}
+                <span role="img" aria-label="Stickied">📌</span>
+            {{/if}}
+
+            {{#if authorIsModerator}}
+                <span role="img" aria-label="Moderator">🛡</span>
+            {{/if}}
+
+            {{#if all_awardings}}
+                {{#each all_awardings}}
+                    <img src="{{resized_icons.0.url}}" alt="{{description}}">
+                {{/each}}
+            {{/if}}
+
+            {{timeAgo created_utc}}
+        </span>
+    </header>
+
+    <div class="c-post-preview__title">
+        <h2 class="c-post-preview__title-text">
+            {{#if media}}
+                <a href="{{permalink}}">
+                    {{@index}}: {{title}}
+                </a>
+            {{else}}
+                <a href="{{url}}">
+                    {{@index}}: {{title}}
+                </a>
+            {{/if}}
+        </h2>
+        {{#if link_flair_text}}
+            <span class="c-flair c-flair--{{link_flair_text_color}}">{{link_flair_text}}</span>
+        {{/if}}
+    </div>
+
+    {{#if over_18}}
+        {{#if @root.nsfw}}
+            {{> post-content}}
+        {{else}}
+            <a href="/nsfw/r/{{@root.subredditName}}">This post is NSFW. Click this link to enable NSFW content</a>
+        {{/if}}
+    {{else}}
+        {{> post-content}}
+    {{/if}}
+
+    <footer class="c-post-preview__footer">
+        <a href="https://reddit.com{{permalink}}" class="c-post-preview__comments"
+           aria-label="View comments">{{num_comments}} comments</a>
+    </footer>
+</article>

@@ -1,0 +1,57 @@
+{{#if media}}
+
+    {{#if media.image}}
+
+        <div class="c-post-preview__media-container">
+            <img class="c-post-preview__media" src="{{media.image.url}}" alt="{{title}}">
+        </div>
+
+    {{/if}}
+
+    {{#if media.images}}
+
+        <div class="c-post-preview__media-container">
+            <img
+                    class="c-post-preview__media"
+
+                    srcset="{{#each media.images}}{{url}} {{width}}{{#if @last}}{{else}}, {{/if}}{{/each}}"
+
+                    sizes="{{#each media.images}}(max-width: {{width}}px) {{width}}{{#if
+                            @last}}{{else}},{{/if}}{{/each}}"
+
+                    src="{{media.images.3.url}}"
+                    alt="{{title}}">
+        </div>
+
+    {{/if}}
+
+    {{#if media.videos}}
+        <video class="c-post-preview__media" preload="none"
+            {{#if isGif}}
+               controls muted
+            {{else}}
+               controls muted
+            {{/if}}
+               poster="{{media.videos.placeholder}}">
+
+            {{#each media.videos.formats}}
+                <source src="{{url}}" type="{{type}}"/>
+            {{/each}}
+
+            Your browser does not support html5 video
+        </video>
+    {{/if}}
+
+{{else}}
+
+    {{#if selftext_html}}
+        <p class="c-post-preview__selftext">
+            {{selftext}}
+        </p>
+    {{else}}
+
+        <!--        Not sure what to show here....-->
+
+    {{/if}}
+
+{{/if}}
