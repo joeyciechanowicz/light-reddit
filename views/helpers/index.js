@@ -38,7 +38,20 @@ function timeAgo(utcTime) {
 	}
 }
 
+function shortenedNumber(amount) {
+	if (amount >= 10000) {
+		return Math.floor(amount / 1000) + 'k';
+	}
+
+	if (amount >= 1000) {
+		return (amount / 1000).toFixed(1) + 'k';
+
+	}
+	return amount;
+}
+
 
 module.exports = {
-	timeAgo
+	timeAgo,
+	shortenedNumber
 };

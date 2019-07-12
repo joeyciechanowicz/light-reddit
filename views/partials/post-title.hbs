@@ -1,0 +1,15 @@
+<div class="c-post__title">
+    <h2 class="c-post__title_text">
+        <a href="{{permalink}}">
+            {{title}}
+        </a>
+    </h2>
+    {{#if link_flair_text}}
+        <span class="c-flair c-flair--text-{{link_flair_text_color}}"
+            {{#if link_flair_background_color}}
+              style="background-color: {{link_flair_background_color}}"
+            {{/if}}>
+                {{link_flair_text}}
+        </span>
+    {{/if}}
+</div>

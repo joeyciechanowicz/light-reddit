@@ -1,0 +1,23 @@
+.c-flair {
+  display: inline-block;
+  margin-left: var(--s-4);
+  padding: var(--s-4) var(--s-1);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  border-radius: 3px;
+}
+
+.c-flair--text-dark {
+  background-color: #EDEFF1;
+  color: #000000;
+}
+
+.c-flair--text-light {
+  background-color: #343536;
+  color: #ffffff;
+}
+
+.c-flair__rich {
+  max-width: 25px;
+  height: auto;
+}

@@ -1,57 +1,60 @@
-{{#if media}}
+<section class="c-post__content">
+    {{#if resolvedMedia}}
+        <div class="c-post__media">
+            {{#if resolvedMedia.image}}
 
-    {{#if media.image}}
+                <img class="c-post__image" src="{{resolvedMedia.image.url}}" alt="{{title}}">
 
-        <div class="c-post-preview__media-container">
-            <img class="c-post-preview__media" src="{{media.image.url}}" alt="{{title}}">
-        </div>
-
-    {{/if}}
-
-    {{#if media.images}}
-
-        <div class="c-post-preview__media-container">
-            <img
-                    class="c-post-preview__media"
-
-                    srcset="{{#each media.images}}{{url}} {{width}}{{#if @last}}{{else}}, {{/if}}{{/each}}"
-
-                    sizes="{{#each media.images}}(max-width: {{width}}px) {{width}}{{#if
-                            @last}}{{else}},{{/if}}{{/each}}"
-
-                    src="{{media.images.3.url}}"
-                    alt="{{title}}">
-        </div>
-
-    {{/if}}
-
-    {{#if media.videos}}
-        <video class="c-post-preview__media" preload="none"
-            {{#if isGif}}
-               controls muted
-            {{else}}
-               controls muted
             {{/if}}
-               poster="{{media.videos.placeholder}}">
 
-            {{#each media.videos.formats}}
-                <source src="{{url}}" type="{{type}}"/>
-            {{/each}}
+            {{#if resolvedMedia.images}}
+                <img class="c-post__image"
 
-            Your browser does not support html5 video
-        </video>
-    {{/if}}
+                     srcset="{{#each resolvedMedia.images}}{{url}} {{width}}{{#if @last}}{{else}}, {{/if}}{{/each}}"
 
-{{else}}
+                     sizes="{{#each resolvedMedia.images}}(max-width: {{width}}px) {{width}}{{#if
+                             @last}}{{else}},{{/if}}{{/each}}"
 
-    {{#if selftext_html}}
-        <p class="c-post-preview__selftext">
-            {{selftext}}
-        </p>
+                     src="{{resolvedMedia.images.3.url}}"
+                     alt="{{title}}">
+            {{/if}}
+
+            {{#if resolvedMedia.video}}
+                <video class="c-post__video" preload="none"
+                    {{#if isGif}}
+
+                    {{else}}
+                       controls
+                    {{/if}}
+                       poster="{{resolvedMedia.video.placeholder}}">
+
+                    {{#each resolvedMedia.video.formats}}
+                        <source src="{{url}}" type="{{type}}"/>
+                    {{/each}}
+
+                    Your browser does not support html5 video
+                </video>
+            {{/if}}
+
+        </div>
     {{else}}
 
-        <!--        Not sure what to show here....-->
-
+        {{#if selftext_html}}
+            {{{ selftext_html }}}
+        {{else}}
+            {{#if externalLink}}
+                <a href="{{externalLink}}" rel="noopener noreferrer" target="_blank"
+                   class="c-post-preview__external-link">
+                    {{externalLink}}
+                </a>
+            {{else}}
+                <a href="{{url}}" rel="noopener noreferrer" target="_blank"
+                   class="c-post-preview__external-link">
+                    {{url}}
+                </a>
+            {{/if}}
+        {{/if}}
     {{/if}}
+</section>
 
-{{/if}}
+

@@ -1,19 +1,41 @@
+<h1>/r/{{subredditName}}</h1>
 
-<main class="c-main" id="main">
-    <h1>/r/{{subredditName}}</h1>
+{{#if nsfw}}
+    <a href="/r/{{subredditName}}">Disable NSFW mode</a>
+{{/if}}
 
-    {{#if nsfw}}
-        <a href="/r/{{subredditName}}">Disable NSFW mode</a>
-    {{/if}}
+{{#each posts}}
+    <article role="article" class="c-post" id="{{id}}{{#if @index}}{{else}} main{{/if}}">
+        {{> post-header}}
 
-    {{#each posts}}
-        {{>post-preview}}
-    {{/each}}
+        {{> post-title}}
+
+        {{#if over_18}}
+            {{#if @root.nsfw}}
+                {{> post-content}}
+            {{else}}
+                <a href="/nsfw/r/{{@root.subredditName}}">This post is NSFW. Click this link to enable NSFW content</a>
+            {{/if}}
+        {{else}}
+            {{> post-content}}
+        {{/if}}
+
+        <footer class="c-post__footer">
+            <p class="c-post__comments">
+                <a href="https://reddit.com{{permalink}}" class="c-post__comments"
+                  aria-label="View comments">
+                    {{num_comments}} comments
+                </a>
+            </p>
+
+            <p class="c-post__points">{{shortenedNumber score}}</p>
+        </footer>
+    </article>
+{{/each}}
 
 
-    {{#if showBack}}
-<!--        <a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?count={{backwardCount}}">Previous</a>-->
-    {{/if}}
+{{#if showBack}}
+    <!--        <a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?count={{backwardCount}}">Previous</a>-->
+{{/if}}
 
-    <a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?after={{after}}&count={{count}}">Next</a>
-</main>
+<a href="{{#if nsfw}}/nsfw{{/if}}/r/{{subredditName}}?after={{after}}&count={{count}}">Next</a>

@@ -1,0 +1,44 @@
+<div class="c-post-header">
+    {{#if @root.showPostSubreddit}}
+        <p class="c-post-header__subreddit">
+            {{subreddit_name_prefixed}}
+        </p>
+    {{/if}}
+
+    <p class="c-post-header__posted-by">
+
+        Posted by&nbsp;
+
+        {{#if author_flair_richtext}}
+            {{#each author_flair_richtext}}
+                <img class="c-flair__rich" src="{{u}}" alt="{{a}}">&nbsp;
+            {{/each}}
+        {{else}}
+            {{#if author_flair_text}}
+                <span class="c-flair__flair c-flair__flair--text-{{author_flair_text_color}}">{{author_flair_text}}
+                    &nbsp;</span>
+            {{/if}}
+        {{/if}}
+
+        <a class="c-post-header__author" href="https://www.reddit.com/user/{{author}}">u/{{author}}</a>&nbsp;
+
+
+        {{#if stickied}}
+            <span role="img" aria-label="Stickied">📌</span>&nbsp;
+        {{/if}}
+
+        {{#if authorIsModerator}}
+            <span role="img" aria-label="Moderator">🛡</span>&nbsp;
+        {{/if}}
+
+        {{#if all_awardings}}
+            {{#each all_awardings}}
+                <img src="{{resized_icons.0.url}}" alt="{{description}}">
+            {{/each}}
+        {{/if}}
+    </p>
+
+    <p class="c-post-header__time">
+        {{timeAgo created_utc}}
+    </p>
+</div>

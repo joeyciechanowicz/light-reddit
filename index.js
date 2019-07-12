@@ -17,11 +17,12 @@ app.set('port', process.env.PORT || 3000);
 
 app.engine('hbs', handlebars({
 	helpers: require('./views/helpers'),
-	extname: '.hbs'
+	extname: '.hbs',
+	defaultLayout: 'layout'
 }));
 app.set('view engine', 'hbs');
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 // get anonymous token from: https://not-an-aardvark.github.io/reddit-oauth-helper/
 // this won't work long term...

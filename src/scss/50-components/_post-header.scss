@@ -1,0 +1,32 @@
+.c-post-header {
+  margin-bottom: var(--s-1);
+  color: var(--bay-wharf);
+  font-size: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.c-post-header__posted-by {
+  display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+}
+
+.c-post-header__subreddit {
+  margin-right: var(--s-1);
+  color: var(--prestige-blue);
+}
+
+.c-post-header__author {
+  color: inherit;
+}
+
+.c-post-header__time {
+  //margin-left: auto;
+}

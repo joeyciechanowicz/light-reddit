@@ -1,0 +1,90 @@
+.c-post {
+  box-shadow: 0 2px 2px rgba(50, 50, 93, 0.2);
+  padding: var(--s1);
+  margin-bottom: var(--s1);
+  background-color: white;
+  border-radius: 4px;
+  font-size: 1.4rem;
+}
+
+.c-post__title {
+  margin-bottom: var(--s-1);
+}
+
+.c-post__title_text {
+  margin: 0;
+  display: inline-block;
+  font-size: 1.8rem;
+  color: var(--prestige-blue);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.c-post__video {
+  width: 100%;
+  max-height: 30em;
+}
+
+.c-post__image {
+  max-width: 100%;
+  max-height: 30em;
+  margin: 0 auto;
+}
+
+.c-post__media {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.c-post__content {
+  //border-top: 1px solid var(--city-lights);
+  //border-bottom: 1px solid var(--city-lights);
+  border-left: var(--s-3) solid var(--city-lights);
+
+  //margin: 0 calc(-1 * var(--s1));
+  padding: var(--s-1) var(--s1) var(--s-1);
+}
+
+.md {
+  // These rules are here to target the generated markdown. As we don't want to parse render it ourselves
+  table, thead, tbody, tr, th {
+    border: var(--s-5) solid var(--color-dark);
+  }
+
+  hr {
+    background-color: var(--color-mid);
+    height: var(--s-5);
+  }
+
+  *:first-child {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.c-post__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--s0);
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.c-post__points {
+  font-size: 1.2rem;
+  background-color: var(--lime-soap);
+  padding: var(--s-4) var(--s-2);
+  line-height: 1.2;
+  border-radius: 3px;
+  font-weight: bold;
+}
