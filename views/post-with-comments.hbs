@@ -1,7 +1,20 @@
 <div class="c-post">
     {{> post-header}}
 
-    {{> post-title}}
+    <div class="c-post__title">
+        <h2 class="c-post__title_text" id="main">
+            {{title}}
+        </h2>
+        {{#if link_flair_text}}
+            <span class="c-flair c-flair--text-{{link_flair_text_color}}"
+                {{#if link_flair_background_color}}
+                  style="background-color: {{link_flair_background_color}}"
+                {{/if}}>
+                {{link_flair_text}}
+            </span>
+        {{/if}}
+    </div>
+
 
     {{#if over_18}}
         {{#if @root.nsfw}}
@@ -13,8 +26,15 @@
         {{> post-content}}
     {{/if}}
 
-    <footer class="c-post__footer">
-        <a href="https://reddit.com{{permalink}}" class="c-post__comments"
-           aria-label="View comments">{{num_comments}} comments</a>
-    </footer>
+    <div class="c-post__footer">
+        <p class="c-post__comments">
+            {{shortenedNumber num_comments}} comments
+        </p>
+
+        <p class="c-post__points">{{shortenedNumber score}}</p>
+    </div>
+
+    {{#each comments}}
+        {{> comments}}
+    {{/each}}
 </div>

@@ -1,4 +1,4 @@
-<h1>/r/{{subredditName}}</h1>
+<h1>{{title}}</h1>
 
 {{#if nsfw}}
     <a href="/r/{{subredditName}}">Disable NSFW mode</a>
@@ -22,9 +22,9 @@
 
         <footer class="c-post__footer">
             <p class="c-post__comments">
-                <a href="https://reddit.com{{permalink}}" class="c-post__comments"
+                <a href="{{permalink}}" class="c-post__comments"
                   aria-label="View comments">
-                    {{num_comments}} comments
+                    {{shortenedNumber num_comments}} comments
                 </a>
             </p>
 

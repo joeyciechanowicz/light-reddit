@@ -1,16 +1,16 @@
-<section class="c-post__content">
-    {{#if resolvedMedia}}
+{{#if resolvedMedia}}
+    <section class="c-post__content">
         <div class="c-post__media">
             {{#if resolvedMedia.image}}
 
-                <img class="c-post__image" src="{{resolvedMedia.image.url}}" alt="{{title}}">
+                <img class="c-post__image" loading="lazy" src="{{resolvedMedia.image.url}}" alt="{{title}}">
 
             {{/if}}
 
             {{#if resolvedMedia.images}}
                 <img class="c-post__image"
-
-                     srcset="{{#each resolvedMedia.images}}{{url}} {{width}}{{#if @last}}{{else}}, {{/if}}{{/each}}"
+                     loading="lazy"
+                     srcset="{{#each resolvedMedia.images}}{{url}} {{width}}w{{#if @last}}{{else}}, {{/if}}{{/each}}"
 
                      sizes="{{#each resolvedMedia.images}}(max-width: {{width}}px) {{width}}{{#if
                              @last}}{{else}},{{/if}}{{/each}}"
@@ -37,24 +37,28 @@
             {{/if}}
 
         </div>
-    {{else}}
+    </section>
+{{else}}
 
-        {{#if selftext_html}}
+    {{#if selftext_html}}
+        <section class="c-post__content">
             {{{ selftext_html }}}
-        {{else}}
-            {{#if externalLink}}
+        </section>
+    {{else}}
+        {{#if externalLink}}
+            <section class="c-post__content">
                 <a href="{{externalLink}}" rel="noopener noreferrer" target="_blank"
                    class="c-post-preview__external-link">
                     {{externalLink}}
                 </a>
-            {{else}}
-                <a href="{{url}}" rel="noopener noreferrer" target="_blank"
-                   class="c-post-preview__external-link">
-                    {{url}}
-                </a>
-            {{/if}}
+            </section>
+        {{else}}
+            <!--                <a href="{{url}}" rel="noopener noreferrer" target="_blank"-->
+            <!--                   class="c-post-preview__external-link">-->
+            <!--                    {{url}}-->
+            <!--                </a>-->
         {{/if}}
     {{/if}}
-</section>
+{{/if}}
 
 

@@ -89,3 +89,5 @@ typings/
 
 .idea
 .env
+dist/
+cached.json

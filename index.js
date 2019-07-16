@@ -4,9 +4,11 @@ const handlebars  = require('express-handlebars');
 const reload = require('reload');
 const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
+const redis = require('express-redis-cache')();
 
 dotenv.config();
 
+const routes = require('./routes/sub-reddit');
 const {error} = require('./lib/middleware');
 
 const app = express();
@@ -40,9 +42,21 @@ app.r = new snoowrap({
 	proxies: false
 });
 
-require('./routes/sub-reddit')(app);
+if (environment === 'development') {
+	app.redis = {
+		route: () => (req, res, next) => next()
+	};
+} else {
+	app.redis = redis;
+}
+
+redis.on('error', function (error) {
+	console.error(error);
+});
 
 app.use(error);
+
+routes(app);
 
 const server = http.createServer(app);
 

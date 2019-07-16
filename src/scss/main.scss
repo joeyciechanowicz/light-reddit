@@ -26,6 +26,7 @@
 
     --ratio: 1.4;
 
+    --s-6: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
     --s-5: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
     --s-4: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
     --s-3: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio));
@@ -105,10 +106,40 @@ footer, header, main, nav {
 
 .c-container {
     padding: var(--s-1);
-    max-width: 75rem;
+    max-width: 100rem;
     margin: 0 auto;
+}
+
+
+.md {
+    // These rules are here to target the generated markdown. As we don't want to parse render it ourselves
+    table {
+        border: var(--s-5) solid var(--color-dark);
+    }
+
+    th, td {
+        border: var(--s-6) solid var(--color-dark);
+    }
+
+    hr {
+        background-color: var(--color-mid);
+        height: var(--s-5);
+    }
+
+    p {
+        margin: var(--s-1);
+    }
+
+    > *:first-child {
+        margin-top: 0;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
 }
 
 @import "50-components/post";
 @import "50-components/post-header";
 @import "50-components/flair";
+@import "50-components/comment";

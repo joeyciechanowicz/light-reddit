@@ -41,32 +41,8 @@
 }
 
 .c-post__content {
-  //border-top: 1px solid var(--city-lights);
-  //border-bottom: 1px solid var(--city-lights);
   border-left: var(--s-3) solid var(--city-lights);
-
-  //margin: 0 calc(-1 * var(--s1));
   padding: var(--s-1) var(--s1) var(--s-1);
-}
-
-.md {
-  // These rules are here to target the generated markdown. As we don't want to parse render it ourselves
-  table, thead, tbody, tr, th {
-    border: var(--s-5) solid var(--color-dark);
-  }
-
-  hr {
-    background-color: var(--color-mid);
-    height: var(--s-5);
-  }
-
-  *:first-child {
-    margin-top: 0;
-  }
-
-  *:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .c-post__footer {

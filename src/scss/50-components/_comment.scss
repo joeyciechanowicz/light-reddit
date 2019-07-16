@@ -1,0 +1,17 @@
+.c-comment {
+  border-left: var(--s-3) solid var(--peace);
+  margin-top: var(--s1);
+  padding-left: var(--s0);
+}
+
+/**
+Confusingly named, this is the container for more comments
+ */
+.c-comments__comments {
+  margin-top: var(--s0);
+  //margin-left: var(--s0);
+}
+
+.c-comment__content {
+
+}

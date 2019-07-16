@@ -21,6 +21,7 @@
   --bay-wharf: #747d8c;
   --prestige-blue: #2f3542;
   --ratio: 1.4;
+  --s-6: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
   --s-5: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
   --s-4: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
   --s-3: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio));
@@ -84,8 +85,27 @@ footer, header, main, nav {
 
 .c-container {
   padding: var(--s-1);
-  max-width: 75rem;
+  max-width: 100rem;
   margin: 0 auto; }
+
+.md table {
+  border: var(--s-5) solid var(--color-dark); }
+
+.md th, .md td {
+  border: var(--s-6) solid var(--color-dark); }
+
+.md hr {
+  background-color: var(--color-mid);
+  height: var(--s-5); }
+
+.md p {
+  margin: var(--s-1); }
+
+.md > *:first-child {
+  margin-top: 0; }
+
+.md > *:last-child {
+  margin-bottom: 0; }
 
 .c-post {
   box-shadow: 0 2px 2px rgba(50, 50, 93, 0.2);
@@ -125,19 +145,6 @@ footer, header, main, nav {
   border-left: var(--s-3) solid var(--city-lights);
   padding: var(--s-1) var(--s1) var(--s-1); }
 
-.md table, .md thead, .md tbody, .md tr, .md th {
-  border: var(--s-5) solid var(--color-dark); }
-
-.md hr {
-  background-color: var(--color-mid);
-  height: var(--s-5); }
-
-.md *:first-child {
-  margin-top: 0; }
-
-.md *:last-child {
-  margin-bottom: 0; }
-
 .c-post__footer {
   display: flex;
   justify-content: space-between;
@@ -154,27 +161,27 @@ footer, header, main, nav {
   border-radius: 3px;
   font-weight: bold; }
 
-.c-post-header {
+.c-detail-header {
   margin-bottom: var(--s-1);
   color: var(--bay-wharf);
   font-size: 1.2rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center; }
-  .c-post-header p {
+  .c-detail-header p {
     margin-top: 0;
     margin-bottom: 0; }
 
-.c-post-header__posted-by {
+.c-detail-header__posted-by {
   display: flex;
   align-items: center;
   flex: 1 0 auto; }
 
-.c-post-header__subreddit {
+.c-detail-header__subreddit {
   margin-right: var(--s-1);
   color: var(--prestige-blue); }
 
-.c-post-header__author {
+.c-detail-header__author {
   color: inherit; }
 
 .c-flair {
@@ -196,6 +203,17 @@ footer, header, main, nav {
 .c-flair__rich {
   max-width: 25px;
   height: auto; }
+
+.c-comment {
+  border-left: var(--s-3) solid var(--peace);
+  margin-top: var(--s1);
+  padding-left: var(--s0); }
+
+/**
+Confusingly named, this is the container for more comments
+ */
+.c-comments__comments {
+  margin-top: var(--s0); }
 
 
 /*# sourceMappingURL=styles.css.map*/

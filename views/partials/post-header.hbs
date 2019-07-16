@@ -1,12 +1,11 @@
-<div class="c-post-header">
+<div class="c-detail-header">
     {{#if @root.showPostSubreddit}}
-        <p class="c-post-header__subreddit">
-            {{subreddit_name_prefixed}}
+        <p class="c-detail-header__subreddit">
+            <a href="{{subreddit_name_prefixed}}">{{subreddit_name_prefixed}}</a>
         </p>
     {{/if}}
 
-    <p class="c-post-header__posted-by">
-
+    <p class="c-detail-header__posted-by">
         Posted by&nbsp;
 
         {{#if author_flair_richtext}}
@@ -20,8 +19,7 @@
             {{/if}}
         {{/if}}
 
-        <a class="c-post-header__author" href="https://www.reddit.com/user/{{author}}">u/{{author}}</a>&nbsp;
-
+        <a class="c-detail-header__author" href="https://www.reddit.com/user/{{author}}">u/{{author}}</a>&nbsp;
 
         {{#if stickied}}
             <span role="img" aria-label="Stickied">📌</span>&nbsp;
@@ -38,7 +36,7 @@
         {{/if}}
     </p>
 
-    <p class="c-post-header__time">
+    <p class="c-detail-header__time">
         {{timeAgo created_utc}}
     </p>
 </div>

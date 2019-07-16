@@ -69,6 +69,15 @@ function resolveMedia(post) {
 	return displayedPost;
 }
 
+function formatComments(comment) {
+	return {
+		...comment,
+		author: comment.author && comment.author.name ? comment.author.name : comment.author,
+		authorIsModerator: comment.distinguished === 'moderator',
+		replies: comment.replies ? comment.replies.map(formatComments) : []
+	};
+}
+
 module.exports = function (app) {
 	async function subredditHot(subreddit, req, res, next) {
 		try {
@@ -86,13 +95,16 @@ module.exports = function (app) {
 				config.after = req.query.after;
 			}
 
-			let hotRequest;
-			if (req.query.cached) {
-				hotRequest = JSON.parse(fs.readFileSync('./cached.json'));
-			} else {
-				hotRequest = await app.r.getHot(subreddit, config);
-				fs.writeFileSync('./cached.json', JSON.stringify(hotRequest));
-			}
+			// let hotRequest;
+			// if (req.query.cached) {
+			// 	hotRequest = JSON.parse(fs.readFileSync('./cached.json'));
+			// } else {
+			// 	hotRequest = await app.r.getHot(subreddit, config);
+			// 	fs.writeFileSync('./cached.json', JSON.stringify(hotRequest));
+			// }
+
+			const hotRequest = await app.r.getHot(subreddit, config);
+
 
 			if (typeof hotRequest === 'string') {
 				// invalid access_token
@@ -103,19 +115,22 @@ module.exports = function (app) {
 
 			const after = hot[hot.length - 1].id;
 
+			const subredditPrefixed = `r/${subreddit}`;
+
 			const viewModel = {
-				subredditName: subreddit,
 				posts: hot,
 				showPostSubreddit: subreddit === 'popular',
 				showBack: count !== 0,
 				backwardCount: count - limit,
 				forwardCount: count + limit,
+				redditUrl: subredditPrefixed,
+				title: subredditPrefixed,
 				after
 			};
 
-			if (req.query.json) {
-				return res.json(viewModel);
-			}
+			// if (req.query.json) {
+			// 	return res.json(viewModel);
+			// }
 
 			return res.render('sub-reddit', viewModel);
 		} catch (error) {
@@ -129,8 +144,14 @@ module.exports = function (app) {
 
 			const viewModel = {
 				...resolveMedia(post),
+				comments: post.comments ? post.comments.map(formatComments) : [],
 				showPostSubreddit: true,
+				redditUrl: req.url,
 			};
+
+			// if (req.query.json) {
+			// 	return res.json(viewModel);
+			// }
 
 			res.render('post-with-comments', viewModel);
 		} catch (error) {
@@ -141,6 +162,7 @@ module.exports = function (app) {
 	const popularHot = () => (req, res, next) => subredditHot('popular', req, res, next);
 
 	const router = express.Router();
+	router.use(app.redis.route());
 	router.get('/', popularHot());
 	router.get('/r/:sub', (req, res, next) => subredditHot(req.params.sub, req, res, next));
 	router.get('/r/:sub/comments/:id/:title', (req, res, next) => post(req.params.id, req, res, next));

@@ -39,7 +39,7 @@ function timeAgo(utcTime) {
 }
 
 function shortenedNumber(amount) {
-	if (amount >= 10000) {
+	if (amount >= 100000) {
 		return Math.floor(amount / 1000) + 'k';
 	}
 
@@ -50,8 +50,16 @@ function shortenedNumber(amount) {
 	return amount;
 }
 
+function numberIfGreaterThan1(count) {
+	if (count > 1) {
+		return count + '&nbsp;';
+	}
+	return '';
+}
+
 
 module.exports = {
 	timeAgo,
-	shortenedNumber
+	shortenedNumber,
+	numberIfGreaterThan1
 };
