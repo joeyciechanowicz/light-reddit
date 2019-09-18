@@ -10,76 +10,10 @@ function setNsfw(req, res, next) {
 
 const limit = 25;
 
-function resolveMedia(post) {
-	const displayedPost = {
-		...post,
-		author: post.author && post.author.name ? post.author.name : post.author,
-		authorIsModerator: post.distinguished === 'moderator'
-	};
 
-	if (post.post_hint === 'link') {
-		displayedPost.externalLink = post.url;
-	} else if (post.is_video) {
-		displayedPost.resolvedMedia = {
-			video: {
-				formats: [
-					{
-						url: post.media.reddit_video.fallback_url,
-						type: 'video/mp4'
-					}
-				],
-				width: post.media.reddit_video.width,
-				height: post.media.reddit_video.height,
-				placeholder: post.preview.images[0].resolutions[0].url
-			}
-		};
-	} else if (post.preview && post.preview.reddit_video_preview) {
-		displayedPost.resolvedMedia = {
-			video: {
-				isGif: post.preview.reddit_video_preview.is_gif,
-				formats: [
-					{
-						url: post.preview.reddit_video_preview.fallback_url,
-						type: 'video/mp4'
-					}
-				],
-				width: post.preview.reddit_video_preview.width,
-				height: post.preview.reddit_video_preview.height,
-				placeholder: post.preview.images[0].resolutions[0].url
-			}
-		};
-	} else if (post.post_hint === 'image' && post.media) {
-		displayedPost.resolvedMedia = {
-			images: post.media.images
-		};
-	} else if (/\.(jpg|png)$/.exec(post.url)) {
-		if (post.preview && post.preview.images.length > 0) {
-			displayedPost.resolvedMedia = {
-				images: post.preview.images[0].resolutions
-			}
-		} else {
-			displayedPost.resolvedMedia = {
-				image: {
-					url: post.url
-				}
-			}
-		}
-	}
-
-	return displayedPost;
-}
-
-function formatComments(comment) {
-	return {
-		...comment,
-		author: comment.author && comment.author.name ? comment.author.name : comment.author,
-		authorIsModerator: comment.distinguished === 'moderator',
-		replies: comment.replies ? comment.replies.map(formatComments) : []
-	};
-}
 
 module.exports = function (app) {
-	async function subredditHot(subreddit, req, res, next) {
+	async function getSubreddit(subreddit, req, res, next) {
 		try {
 			const config = {
 				limit: limit

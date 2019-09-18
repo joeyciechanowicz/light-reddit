@@ -17,7 +17,6 @@ if (production) {
 	plugins.push(new CompressionPlugin());
 }
 
-
 module.exports = {
 	entry: {
 		styles:path.resolve(__dirname, 'src/scss/main.scss')

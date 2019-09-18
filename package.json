@@ -2,18 +2,20 @@
   "name": "reddit-no-js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js",
     "start:webpack": "webpack --config webpack.config.js --watch --progress ",
-    "start:server": "nodemon --ext js,hbs ./index.js",
+    "start:server": "nodemon --ext js,hbs app/server.js | bistre",
     "start:dev": "NODE_ENV=development concurrently --kill-others-on-fail -c \"blue,magenta\" \"npm:start:webpack\" \"npm:start:server\"",
-    "start": "NODE_ENV=production node ./index.js"
+    "start": "NODE_ENV=production node app/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bole": "^3.0.2",
+    "bistre": "^1.0.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
